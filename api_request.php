@@ -6,6 +6,8 @@
 	$dotenv->load();
 
 	$api_key = $_ENV['API_KEY'];
+	echo $api_key;
+	return;
 
 	function curl_request($dealer_id, $start) {
 		$curl = curl_init();
