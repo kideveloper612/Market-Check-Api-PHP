@@ -6,9 +6,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Bootstrap 4 Example</title>
+	<title>Dealer Api</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" href="https://apidocs.marketcheck.com//favicon.ico">
 	<link rel="stylesheet" type="text/css" href="./main.css">
 </head>
 <body>
