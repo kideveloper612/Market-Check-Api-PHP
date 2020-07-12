@@ -7,23 +7,54 @@
 
 	$api_key = $_ENV['API_KEY'];
 
-	$ch = curl_init();
+	function curl_request($dealer_id, $start) {
+		$curl = curl_init();
 
-	curl_setopt($ch, CURLOPT_URL, "http://api.marketcheck.com/v2/search/car/recents?api_key=&dealer_id=1000979&sold=true");
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+		curl_setopt_array($curl, array(
+			CURLOPT_URL => "http://api.marketcheck.com/v2/search/car/active?api_key=".$GLOBALS['api_key']."&dealer_id=".$dealer_id."&start=".$start."&rows=50&sold=true",
+			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_ENCODING => "",
+			CURLOPT_TIMEOUT => 0,
+			CURLOPT_FOLLOWLOCATION => true,
+			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+			CURLOPT_CUSTOMREQUEST => "GET",
+			CURLOPT_HTTPHEADER => array(
+				"Host: marketcheck-prod.apigee.net", "Content-Type: application/json"
+			),
+		));
 
+		$response = curl_exec($curl);
 
-	$headers = array();
-	$headers[] = "Accept: application/json";
-	$headers[] = "Authorization: Bearer APIKEY";
-	curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-
-	$result = curl_exec($ch);
-	if (curl_errno($ch)) {
-	    echo 'Error:' . curl_error($ch);
+		curl_close($curl);
+		return $response;
 	}
-	curl_close ($ch);
-	echo $result;
+
+	if (isset($_GET['dealer_id'])) {
+
+		$dealer_id = $_GET['dealer_id'];
+		$start = -50;
+
+		$flag = true;
+		$result = array();
+
+		while ($flag) {
+			$start += 50;
+			$curl_res = curl_request($dealer_id, $start);
+			$json_data = json_decode($curl_res);
+
+			if (isset($json_data -> listings)) {
+				if (empty($json_data -> listings)) {
+					$flag = false;
+				}
+				foreach ($json_data -> listings as $value) {
+					array_push($result, $value);
+				}
+			} else {
+				$flag = false;
+			}
+		}
+
+		echo json_encode($result);
+	}
 
 ?>
