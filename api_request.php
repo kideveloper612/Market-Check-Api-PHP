@@ -7,11 +7,11 @@
 
 	$api_key = $_ENV['API_KEY'];
 
-	function curl_request($dealer_id, $start) {
+	function curl_request($source_site, $start) {
 		$curl = curl_init();
 
 		curl_setopt_array($curl, array(
-			CURLOPT_URL => "http://api.marketcheck.com/v2/search/car/active?api_key=".$GLOBALS['api_key']."&dealer_id=".$dealer_id."&start=".$start."&rows=50&sold=true",
+			CURLOPT_URL => "http://api.marketcheck.com/v2/search/car/active?api_key=".$GLOBALS['api_key']."&sold=true&rows=50&source=".$source_site."&start=".$start,
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_ENCODING => "",
 			CURLOPT_TIMEOUT => 0,
@@ -29,9 +29,9 @@
 		return $response;
 	}
 
-	if (isset($_GET['dealer_id'])) {
+	if (isset($_GET['source_site'])) {
 
-		$dealer_id = $_GET['dealer_id'];
+		$source_site = $_GET['source_site'];
 		$start = -50;
 
 		$flag = true;
@@ -39,7 +39,7 @@
 
 		while ($flag) {
 			$start += 50;
-			$curl_res = curl_request($dealer_id, $start);
+			$curl_res = curl_request($source_site, $start);
 			$json_data = json_decode($curl_res);
 
 			if (isset($json_data -> listings)) {
