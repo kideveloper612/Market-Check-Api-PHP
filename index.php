@@ -67,7 +67,7 @@
 								json_data.forEach((item, index) => {
 									const time_count = item['last_seen_at'];
 									let stock = inventory_type = last_seen_at_date = media = photo = price = build = year = make = model = heading = link = color = '';
-									if (time_count > n) {
+									if (time_count > n || 1=1) {
 										if (item.hasOwnProperty('stock_no')) {
 											stock = item['stock_no'];
 										} else {
@@ -134,8 +134,8 @@
 											heading = 'NOT SURE';
 										}
 										$(".card_group").append(
-											"<div class='one_card'><div class='OEM'>" + last_seen_date + "</div><a href='" + link + "' target='_blank'><img src='" + photo + "' alter='No image'></a><table><tr><td>Stock Number:</td><td>" + stock + "</td></tr><tr><td>Inventory Type:</td><td>" + inventory_type + "</td></tr><tr><td>Color:</td><td>" + color + "</td></tr><tr><td>Price:</td><td>" + price + "</td></tr></table></div>"
-											); 
+										"<div class='one_card'><div class='OEM'>" + last_seen_date + "</div><table><tr><td>Stock Number:</td><td>" + stock + "</td></tr><tr><td>OEM:</td><td>" + heading + "</td></tr><tr><td>Inventory Type:</td><td>" + inventory_type + "</td></tr><tr><td>Color:</td><td>" + color + "</td></tr><tr><td>Price:</td><td>" + price + "</td></tr></table></div>"
+										);
 									}
 								});
 							} else {

@@ -116,6 +116,7 @@ table {
 	text-align: initial;
 	width: 90%;
 	display: inline-table;
+	font-size: 14px;
 }
 
 table > tbody > tr {
@@ -123,7 +124,7 @@ table > tbody > tr {
 }
 
 table > tbody > tr > td:first-child{
-	font-weight: 600;
+	font-weight: bold;
 }
 
 table > tbody > tr > td:nth-child(2){
