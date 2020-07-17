@@ -13,7 +13,6 @@
 	<link rel="stylesheet" type="text/css" href="./main.css">
 </head>
 <body>
-
 <div class="container">
 	<span class="validation">please input valid source</span>
 	<section>
@@ -32,11 +31,9 @@
 		<div class="card_group">
 	</section>
 </div>
-
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-
 	<script type="text/javascript">
 		$(document).ready(function(){
 			var d = new Date();
